@@ -5,10 +5,10 @@ front:
   volumes:
     - www:/var/www
     - sites:/etc/nginx/sites-enabled
-#   links:
-#     - mysql:mysql
+  links:
+    - mysql:mysql
 
-# mysql:
-#   image: images/mariadb
-#   ports:
-#     - "3306:3306"
+mysql:
+  build: images/mariadb
+  ports:
+    - "3306:3306"

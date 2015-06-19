@@ -19,8 +19,6 @@ RUN mkdir -p /etc/nginx
 RUN mkdir -p /var/run/php-fpm
 RUN mkdir -p /var/log/supervisor
 
-RUN echo "extension=pdo_sqlite.so"
-
 RUN rm /etc/nginx/nginx.conf
 ADD nginx.conf /etc/nginx/nginx.conf
 
