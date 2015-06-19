@@ -19,4 +19,4 @@ EXPOSE 3306
 
 ENV TERM dumb
 
-CMD ["/usr/bin/supervisor"]
+CMD ["/usr/bin/supervisord"]
