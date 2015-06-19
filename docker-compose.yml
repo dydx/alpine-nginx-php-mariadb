@@ -1,0 +1,14 @@
+front:
+  build: images/nginx
+  ports:
+    - "80:80"
+  volumes:
+    - www:/var/www
+    - sites:/etc/nginx/sites-enabled
+#   links:
+#     - mysql:mysql
+
+# mysql:
+#   image: images/mariadb
+#   ports:
+#     - "3306:3306"
