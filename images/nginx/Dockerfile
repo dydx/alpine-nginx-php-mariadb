@@ -8,8 +8,11 @@ RUN apk --update add \
   php-json \
   php-openssl \
   php-mysql \
+  php-pdo_mysql \
   php-mcrypt \
   php-sqlite3 \
+  php-pdo_sqlite \
+  php-ctype \
   supervisor
 
 RUN mkdir -p /etc/nginx
