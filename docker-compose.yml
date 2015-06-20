@@ -1,5 +1,5 @@
 front:
-  build: images/nginx
+  image: dydx/alpine-nginx-phpfpm
   ports:
     - "80:80"
   volumes:
@@ -9,7 +9,7 @@ front:
     - mysql:mysql
 
 mysql:
-  build: images/mariadb
+  image: dydx/alpine-mariadb
   ports:
     - "3306:3306"
   volumes:
