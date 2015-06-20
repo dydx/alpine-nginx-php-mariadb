@@ -30,5 +30,13 @@ MySQL is persisted to the host in the `database` directory, Nginx's default vhos
 
 The setup is a little opinionated for Laravel development; the current Nginx vhost has `/var/www/default/public` as its doc root. You can obviously change this for your needs.
 
+## size
+I wanted these containers to be pretty small, considering that my main workstation is an Acer C720 with the 16Gb SSD (running Elementary OS). On my machine, here are the image virtual sizes:
+
+* front: 70.05 MB
+* mysql: 199.5 MB
+
+I think this is considerably smaller than the setup I had with [kasperisager's](https://github.com/kasperisager) excellent [phpstack](https://github.com/kasperisager/phpstack). There isn't anything inherently wrong with his setup (it actually has a lot more features baked in), but it was cramping my laptop up quite a bit.
+
 ## TODO
 I'm considering adding in Composer, PHPUnit, NodeJS/Gulp/Bower for doing *all* of the development related tasks in the nginx container, but I'm unsure just how necessary that is.
