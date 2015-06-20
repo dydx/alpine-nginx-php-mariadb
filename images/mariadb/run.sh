@@ -1,27 +1,15 @@
-#!/bin/bash
+#!/bin/sh
 
-MYSQL_HOME = "/var/lib/mysql"
+VOLUME_HOME="/var/lib/mysql"
 
-if [[! -d MYSQL_HOME/mysql]]; then
-    echo "=> initial MariaDB configuration"
+if [[ ! -d $VOLUME_HOME/mysql ]]; then
+    echo "=> an empty or uninitialized MariaDB volume is detected"
+    echo "=> installing MariaDB"
     mysql_install_db > /dev/null 2>&1
-    mysqld_safe > /dev/null 2>&1
-    RET=1
-    while [[ RET -ne 0 ]]; do
-        echo "=> waiting for MariaDB to start"
-        sleep 10
-        mysql -uroot -e "status" > /dev/null 2>&1
-        RET=$?
-    done
-    mysql -uroot -e "CREATE USER 'homestead'@'%' IDENTIFIED BY 'secret'"
-    mysql -uroot -e "GRANT ALL PRIVILEGES ON *.* TO 'homestead'@'%' WITH GRANT OPTION"
-    mysql -uroot -e "FLUSH PRIVILEGES"
-    mysql -uroot -e "CREATE SCHEMA homestead"
-
-    echo "=> If all went well, you may connect to mysql as 'homestead' with the password 'secret'"
-    mysqladmin -uroot shutdown
+    echo "=> done!"
+    /mariadb_init.sh
 else
-    echo "=> using existing MariaDB setup"
+    echo "=> using an existing MariaDB volume"
 fi
 
 exec mysqld_safe

@@ -10,7 +10,8 @@ RUN apk --update add \
 # mariadb, including creating our 'homestead'
 # user and database creation
 ADD run.sh /run.sh
-RUN chmod 775 /run.sh
+ADD mariadb_init.sh /mariadb_init.sh
+RUN chmod 775 /*.sh
 
 # superuser references run.sh as its start command
 RUN mkdir -p /var/log/supervisor
@@ -26,4 +27,4 @@ EXPOSE 3306
 
 ENV TERM dumb
 
-CMD ["/usr/bin/supervisord"]
+CMD ["/run.sh"]
