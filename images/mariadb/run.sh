@@ -3,13 +3,13 @@
 VOLUME_HOME="/var/lib/mysql"
 
 if [[ ! -d $VOLUME_HOME/mysql ]]; then
-    echo "=> an empty or uninitialized MariaDB volume is detected"
-    echo "=> installing MariaDB"
+    echo "=> An empty or uninitialized MariaDB volume is detected in $VOLUME_HOME"
+    echo "=> Installing MariaDB ..."
     mysql_install_db > /dev/null 2>&1
-    echo "=> done!"
-    /mariadb_init.sh
+    echo "=> Done!"  
+    sh mariadb_init.sh
 else
-    echo "=> using an existing MariaDB volume"
+    echo "=> Using an existing volume of MariaDB"
 fi
 
 exec mysqld_safe
