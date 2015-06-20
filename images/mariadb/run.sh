@@ -1,22 +1,27 @@
 #!/bin/bash
-MYSQL_HOME="/var/lib/mysql"
 
-if [[ ! -d MYSQL_HOME/mysql ]]; then
+MYSQL_HOME = "/var/lib/mysql"
+
+if [[! -d MYSQL_HOME/mysql]]; then
+    echo "=> initial MariaDB configuration"
     mysql_install_db > /dev/null 2>&1
-    mysqld_safe > /dev/null 2>&1 &
+    mysqld_safe > /dev/null 2>&1
     RET=1
     while [[ RET -ne 0 ]]; do
-        echo "# Hum... waiting MariaDB startup."
-        sleep 5
+        echo "=> waiting for MariaDB to start"
+        sleep 10
         mysql -uroot -e "status" > /dev/null 2>&1
         RET=$?
     done
     mysql -uroot -e "CREATE USER 'homestead'@'%' IDENTIFIED BY 'secret'"
     mysql -uroot -e "GRANT ALL PRIVILEGES ON *.* TO 'homestead'@'%' WITH GRANT OPTION"
-    echo "# Hi! Connect to this MariaDB Server using: mysql -uhomestead -psecret -h<host> -P<port>"
+    mysql -uroot -e "FLUSH PRIVILEGES"
+    mysql -uroot -e "CREATE SCHEMA homestead"
+
+    echo "=> If all went well, you may connect to mysql as 'homestead' with the password 'secret'"
     mysqladmin -uroot shutdown
 else
-    echo "# Hello again!"
+    echo "=> using existing MariaDB setup"
 fi
 
 exec mysqld_safe
