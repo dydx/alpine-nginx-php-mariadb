@@ -21,7 +21,7 @@ MariaDB is linked as `mysql`, just reference this in your database connection co
 ## Running Artisan migrations and seeds
 I'm still working on a more efficient way to do this, but currently, you have to do this to run artisan:
 
-* attach to the nginx container: `docker exec -it alpine_front_1 /bin/sh`
+* attach to the nginx container: `docker exec -it alpinenginxphpmariadb_front_1 /bin/sh`
 * cd to the web root: `cd /var/www/default`
 * run your migrations/seeds: `php artisan migrate` or `php artisan db:seed`
 
