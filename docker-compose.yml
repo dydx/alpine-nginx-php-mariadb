@@ -3,8 +3,8 @@ front:
   ports:
     - "80:80"
   volumes:
-    - www:/var/www
-    - sites:/etc/nginx/sites-enabled
+    - ./www:/var/www
+    - ./sites:/etc/nginx/sites-enabled
   links:
     - mysql:mysql
 
@@ -13,4 +13,4 @@ mysql:
   ports:
     - "3306:3306"
   volumes:
-    - database:/var/lib/mysql
+    - ./database:/var/lib/mysql
